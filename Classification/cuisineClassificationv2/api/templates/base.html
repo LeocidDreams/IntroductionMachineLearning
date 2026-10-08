@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cuisine Matcher</title>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.min.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <div class="boxCont">
+            <input type="checkbox" value="4" class="checkbox">
+            <label>Apple</label>
+        </div>
+
+        <div class="boxCont">
+            <input type="checkbox" value="247" class="checkbox">
+            <label>Pear</label>
+        </div>
+
+        <div class="boxCont">
+            <input type="checkbox" value="77" class="checkbox">
+            <label>Cherry</label>
+        </div>
+
+        <div class="boxCont">
+            <input type="checkbox" value="126" class="checkbox">
+            <label>Fenugreek</label>
+        </div>
+
+        <div class="boxCont">
+            <input type="checkbox" value="302" class="checkbox">
+            <label>Sake</label>
+        </div>
+
+        <div class="boxCont">
+            <input type="checkbox" value="327" class="checkbox">
+            <label>Soy Sauce</label>
+        </div>
+
+        <div class="boxCont">
+            <input type="checkbox" value="112" class="checkbox">
+            <label>Cumin</label>
+        </div>
+
+        <div style="padding-top:10px">
+            <button onclick="startInference()">
+                What kind of cuisine can you make?
+            </button>
+        </div>
+
+    </div>
+
+    
+
+    <script>
+        const ingredients = Array(380).fill(0);
+
+        const checks = [...document.querySelectorAll(".checkbox")];
+
+        checks.forEach(check => {
+            check.addEventListener("change", () => {
+                ingredients[Number(check.value)] = check.checked ? 1 : 0;
+            });
+        });
+
+        function testCheckBoxes() {
+            return checks.some(check => check.checked);
+        }
+
+        let session = null;
+
+        async function loadModel() {
+            if (!session) {
+                session = await ort.InferenceSession.create("model.onnx");
+            }
+        }
+
+        loadModel();
+
+        async function startInference() {
+
+            if (!testCheckBoxes()) {
+                alert("Please select at least one ingredient.");
+                return;
+            }
+
+            try {
+
+                await loadModel();
+
+                const input = new ort.Tensor(
+                    "float32",
+                    new Float32Array(ingredients),
+                    [1, 380]
+                );
+
+                // Change "float_input" if your model has a different input name.
+                const feeds = {
+                    float_input: input
+                };
+
+                const results = await session.run(feeds);
+
+                console.log(results);
+
+                // Change "label" if your model has a different output name.
+                alert(`You can enjoy ${results.label.data[0]} cuisine today!`);
+
+            } catch (e) {
+                console.error(e);
+                alert("Inference failed.");
+            }
+        }
+    </script>
+
+</body>
+</html>

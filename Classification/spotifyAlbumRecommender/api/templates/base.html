@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+    </head>
+    <body>
+        {% include "_navigation.html" %}
+
+
+        {% with messsages=get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{message}}</li>
+                {% endfor %}
+            
+            </ul>
+        {% endif %}
+        {% endwith %}
+        {%block body %} {% endblock %}
+    </body>
+</html>

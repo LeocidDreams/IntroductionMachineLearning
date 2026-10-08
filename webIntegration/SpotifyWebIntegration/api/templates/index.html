@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block index %}
+    <form action="/routes" method="POST">
+    
+        <label for="country">Country </label>
+        <input type="text" name="country" id="country">
+        <label for="subscription-type">Subscription Type </label>
+        <select id="subscription-type" name="subscription-type" placeholder="subscription-type" required="required">
+            <option value="Free">Free</option>
+            <option value="Family">Family</option>
+            <option value="Student">Student</option>
+            <option value="Premium">Premium</option>         
+        </select>
+        <br>
+        <label for="listening-time">Listening Time</label>
+        <input type="text" name="listening-time" id="listening-time" placeholder="Type total listening time...">
+        <br>
+        <label for="age">Age</label>
+        <input type="text" name="age" id="age" placeholder="Type age..">
+        <br>
+        <button type="submit" name="predict" placeholder="predict-gender" style="margin:15px">predict Gender</button>
+    </form>
+
+{% endblock %} 

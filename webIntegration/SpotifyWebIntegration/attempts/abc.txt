@@ -1,0 +1,98 @@
+# for x in formValues:
+#         # yield x
+#         try:
+
+#             #converting to int
+#             x=int(x)
+#             # return "{}".format(isinstance(x,int))
+#             #appending to current x
+            
+#             intFeatures=np.append(intFeatures,x)
+            
+
+#         except ValueError:
+#             #checking current x is str or not
+#             if not isinstance(x,str):
+#                 continue
+            
+#             #checking keyCountries
+#             if x.upper() in keyCountries:
+#                 #defining filter
+#                 filter_=np.where(keyCountries==x.upper())
+#                 # return filter_
+#             elif x.lower() in countries.keys():
+#                 #defining filter
+#                 filter_=np.where(keyCountries==x.lower())
+#                 # return filter_
+        
+            
+#             #appending to intFeatures
+#             # intFeatures.append(keyCountries==x.lower())
+
+#             intFeatures=np.append(intFeatures,keyCountries[filter_])
+#             if not filter:
+
+#                 return keyCountries[keyCountries[filter_]]
+
+#             if x.upper() in list(map(lambda ele:ele.upper(),keySubscription)):
+                
+#                 #searching x on keySubscription
+#                 filter_=np.where(keySubscription==x.upper())
+
+#                 #appending target value into intFeatures
+#                 # intFeatures.append(valueSubscription[indexSubscription])
+
+#                 intFeatures=np.append(intFeatures,valueSubscription[filter_])
+#         except StopIteration:
+#             pass
+        
+#         finally:
+#             pass
+#     return intFeatures
+#                 return intFeatures
+#     final_features=[np.array(intFeatures)]
+#     print(final_features)
+#     prediction=model.predict(final_features)
+#     output=prediction[0]
+#     return intFeatures
+
+            
+
+
+
+#     for x in formValues:
+#             # yield x
+#         try:
+
+#             indexCountry=None
+#             # if isinstance(x,int) or not isinstance(x,str):
+#             #     #  return '{x} is integer or not str'
+#             #     intFeatures.append(x)
+#             #     yield intFeatures
+#             #     continue
+#             if x.upper() in keyCountries:
+#                 #finding x index
+#                 # indexCountry=keyCountries.index(x.upper())
+#                 indexCountry=np.where(keyCountries==x.upper())
+#             elif x.lower() in countries.keys():
+#                 # finding countries code from countries dict
+#                 # indexCountry=keyCountries.index(countries[x.lower()])
+#                 indexCountry=np.where(keyCountries==x.lower())
+        
+#             intFeatures.append(valueCountries[indexCountry])
+#         except ValueError:
+#             pass
+#         except StopIteration:
+#             break
+#         finally:
+#             if  x.upper() in list(map(lambda ele:ele.upper(),keySubscription)):
+#                 # indexSubscription=keySubscription.index(x.upper())
+#                 indexSubscription=np.where(keySubscription==x.upper())
+#                 intFeatures.append(valueSubscription[indexSubscription])
+
+#     final_features=[np.array(intFeatures).reshape(-1,1)]
+#     yield final_features
+#     prediction=model.predict(final_features.reshape(-1,1))
+#     output=prediction[0]
+
+#     # return output
